@@ -9,7 +9,6 @@ export async function getUser(data: IRequestBodyLogin) {
 
 export async function createUser(data: IRequestBodySignUp) {
   if (!await getUser(data)) {
-    console.log("ói")
     const user = await insertUser(data);
     return user;
   }

@@ -10,7 +10,7 @@ export interface IRequestBodySignUp {
 export async function POST(request: Request, response: Response) {
   const body: IRequestBodySignUp = await request.json();
   console.log("POST to /api/user");
-  console.log(body);
+
   const user = await createUser({
     username: body.username,
     email: body.email,

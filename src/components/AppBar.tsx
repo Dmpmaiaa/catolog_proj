@@ -4,13 +4,8 @@ import SignButton from "./SignButton";
 
 const AppBar = () => {
   return (
-    <header className="flex gap-4 p-4 bg-gradient-to-b from-gray-700 to-gray-600 shadow">
-      <Link className="transition-colors hover:text-blue-500" href={"/"}>
-        Home Page
-      </Link>
-      <Link className="transition-colors hover:text-blue-500" href={"/UserProducts"}>
-        User Products
-      </Link>
+    <header className=" w-full flex items-center gap-4 p-5 h-[136px] bg-mobile-banner">
+      <h1 className="text-scnd-white font-bold text-xl">Catalog</h1>
       <SignButton />
     </header>
   );

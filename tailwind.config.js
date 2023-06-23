@@ -8,7 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "primary" : "hsl(180, 29%, 50%)"
+        "prime-violet" : "#5964E0",
+        "prime-light-violet": "#939BF4",
+        "prime-dark-blue": "#19202D",
+        "prime-midnight": "#121721",
+        "scnd-white": "#FFFFFF",
+        "scnd-light-gray": "#F4F6F8",
+        "scnd-btn" : "#C9C9C9",
+        "scnd-gray" : "#9DAEC2",
+        "scnd-dark-gray": "#6E8098"
+      },
+      backgroundImage: {
+        "mobile-banner": "url('/images/bg-pattern-header.svg')"
       }
     },
   },

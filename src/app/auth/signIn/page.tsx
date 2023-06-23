@@ -19,9 +19,7 @@ export default function LoginPage() {
   };
   return (
     <div
-      className={
-        "flex flex-col justify-center items-center min-h-screen overflow-hidden"
-      }
+      className="border border-black w-full overflow-y-hidden"
     >
       <div className="px-7 py-4 shadow bg-white rounded-md flex flex-col gap-2">
         <TextBox

@@ -1,6 +1,12 @@
 import AppBar from "../components/AppBar";
 import Providers from "../components/Providers";
 import "./globals.css";
+import { Kumbh_Sans } from "next/font/google";
+
+const kumbh = Kumbh_Sans({
+  subsets: ["latin"],
+  variable: "--font-kumbh",
+});
 
 export const metadata = {
   title: "Product Catalog",
@@ -14,10 +20,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={kumbh.className}>
         <Providers>
           <AppBar />
-          <div className="m-10">{children}</div>
+
+          <div className="m-5">{children}</div>
         </Providers>
       </body>
     </html>
