@@ -15,12 +15,12 @@ interface IProducts {
 export default function Products({ products, loading }: IProducts) {
   return (
     <div>
-      {Array.isArray(products) &&
+      {Array.isArray(products) ?
         products.map((product) => (
            
           <div
             key={product._id}
-            className="m-4 p-4 border rounded-md border-slate-400"
+            className="my-2 p-4 border rounded-md border-slate-400"
           >
             <h3 className="font-bold">{product.title}</h3>
             <p>{product.description}</p>
@@ -28,7 +28,8 @@ export default function Products({ products, loading }: IProducts) {
               <p className="font-extralight">{product.price}€</p>
             </div>
           </div>
-        ))}
+        )) : 
+        <h3>No products to be displayed</h3>}
     </div>
   );
 }
