@@ -15,6 +15,7 @@ export default function userProducts() {
     const fetchProducts = async (uid: number | undefined) => {
       setLoading(true);
       if (uid) {
+        console.log(session?.user)
         const res = await fetch(`/api/user/${uid}`, {
           headers: {
             accessToken: String(session?.user.accessToken),
@@ -30,12 +31,12 @@ export default function userProducts() {
   }, [session]);
 
   // Get current posts
-  const lastPostIdx = currentPage * productsPerPage;
-  const firstPostIdx = lastPostIdx - productsPerPage;
-  const currentProducts = products.slice(firstPostIdx, lastPostIdx);
 
-  // Change page
+    const lastProductIdx = currentPage * productsPerPage;
+    const firstProductIdx = lastProductIdx - productsPerPage;
+    const currentProducts = products.slice(firstProductIdx, lastProductIdx);
   
+
   return (
     <div>
       <Products products={currentProducts} loading={loading} />

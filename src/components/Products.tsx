@@ -20,7 +20,7 @@ export default function Products({ products, loading }: IProducts) {
            
           <div
             key={product._id}
-            className="my-2 p-4 border rounded-md border-slate-400"
+            className="my-2 p-4 border rounded-md border-slate-400 sm:"
           >
             <h3 className="font-bold">{product.title}</h3>
             <p>{product.description}</p>

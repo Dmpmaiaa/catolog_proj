@@ -25,7 +25,7 @@ export default function Pagination({
           <li
             key={num}
             className={`px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 ${
-              num === currentPage && "bg-red-500 hover:bg-red-400"
+              num == currentPage && "bg-red-500 hover:bg-red-400"
             }`}
             onClick={() => paginate(num)}
           >

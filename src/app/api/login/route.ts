@@ -7,6 +7,7 @@ import * as bcrypt from "bcrypt";
 export interface IRequestBodyLogin {
   username: string;
   password: string;
+  email?: string
 }
 export async function POST(request: Request) {
   const body: IRequestBodyLogin = await request.json();

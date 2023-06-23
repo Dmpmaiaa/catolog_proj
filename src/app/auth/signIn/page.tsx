@@ -1,14 +1,15 @@
 "use client";
-import Button from "@/components/elements/Button";
 import TextBox from "@/components/elements/TextBox";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import React, { useRef } from "react";
 
 export default function LoginPage() {
   const userName = useRef("");
   const pass = useRef("");
-
+  
   const onSubmit = async () => {
+    console.log("oi");
     const result = await signIn("credentials", {
       username: userName.current,
       password: pass.current,
@@ -32,10 +33,16 @@ export default function LoginPage() {
           type={"password"}
           onChange={(e) => (pass.current = e.target.value)}
         />
-        <Button onClick={onSubmit} className="bg-green-400 rounded-md">
+        <button onClick={onSubmit} className="bg-green-400 rounded-md">
           Login
-        </Button>
+        </button>
       </div>
+
+      <Link href="/auth/signUp/">
+        <button>Sign Up</button>
+      </Link>
+      
+
     </div>
   );
 }
