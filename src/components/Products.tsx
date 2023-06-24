@@ -20,13 +20,16 @@ export default function Products({ products, loading }: IProducts) {
            
           <div
             key={product._id}
-            className="my-2 p-4 border rounded-md border-slate-400 sm:"
+            className="relative my-2 p-4 py-10 bg-scnd-white rounded-md"
+
           >
-            <h3 className="font-bold">{product.title}</h3>
-            <p>{product.description}</p>
-            <div className="bg-green-400 w-14 text-center p-1 rounded-md my-1">
-              <p className="font-extralight">{product.price}€</p>
+            <div className="bg-prime-violet min-w-11 p-3 h-11 text-center rounded-2xl flex items-center justify-center absolute top-[-20px] left-3">
+              <p className="font-bold text-scnd-white text-xs">{product.price}€</p>
             </div>
+
+            <h3 className="font-bold my-2">{product.title}</h3>
+            <p className="text-[#6E8098] my-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque esse soluta obcaecati, voluptate dolorem reprehenderit.</p>
+            <p className="mt-8 mb-[-12px] font-bold text-prime-violet text-sm">Sneakers</p>
           </div>
         )) : 
         <h3>No products to be displayed</h3>}

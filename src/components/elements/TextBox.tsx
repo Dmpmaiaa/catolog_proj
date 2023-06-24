@@ -1,30 +1,20 @@
 import React from "react";
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  lableText?: string;
   error?: string;
+  placeholder?: string;
   children?: React.ReactNode;
 }
 
 const TextBox = React.forwardRef<HTMLInputElement, IProps>(
-  ({ className, children, lableText, type = "text", error, ...props }, ref) => {
+  ({ className, placeholder, children, type = "text", error, ...props }, ref) => {
     return (
       <div className={className + " relative"}>
-        {lableText && (
-          <label
-            className="block text-gray-600  mb-2 text-xs lg:text-sm xl:text-base"
-            htmlFor="txt"
-          >
-            {lableText}
-          </label>
-        )}
         <div className="flex items-stretch">
           <input
             name="txt"
+            placeholder={placeholder}
             autoComplete="off"
-            className={`border border-slate-400 disabled:border-slate-100 w-full block outline-none py-2 px-1 transition-all text-xs lg:text-sm xl:text-base  bg-slate-50 focus:shadow focus:shadow-blue-500
-              ${error && "border-red-500 border  animate-shake"} ${
-              children ? "rounded-r-md" : "rounded-md"
-            }`}
+            className={`w-80 h-14 outline-none py-2 px-4 rounded-md transition-all text-md lg:text-sm xl:text-base  bg-scnd-white ${className}`}
             {...props}
             ref={ref}
             type={type}
@@ -37,7 +27,7 @@ const TextBox = React.forwardRef<HTMLInputElement, IProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
 TextBox.displayName = "TextBox";

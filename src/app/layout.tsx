@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={kumbh.className}>
+      <body className={`${kumbh.className} bg-scnd-light-gray`}>
         <Providers>
           <AppBar />
 

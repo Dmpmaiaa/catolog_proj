@@ -19,12 +19,12 @@ export default function Pagination({
   }
 
   return (
-    <nav className="text-center fixed bottom-20 left-0 right-0">
+    <nav className="text-center mt-10 left-0 right-0">
       <ul className="inline-flex space-x-1">
         {pageNumbers.map((num) => (
           <li
             key={num}
-            className={`px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 ${
+            className={`px-3 py-2 ml-0 w-10 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 ${
               num == currentPage && "bg-red-500 hover:bg-red-400"
             }`}
             onClick={() => paginate(num)}
