@@ -26,7 +26,7 @@ export default async function SignUp() {
         }),
       });
 
-      console.log(res);
+      
       if (res.status === 201) {
         router.push("/auth/signIn");
       } else {
@@ -38,16 +38,16 @@ export default async function SignUp() {
   return (
     <form>
       <TextBox
-        lableText="Username"
+        placeholder="Username"
         onChange={(e) => (userName.current = e.target.value)}
       />
       <TextBox
-        lableText="Email"
+        placeholder="Email"
         type="email"
         onChange={(e) => (email.current = e.target.value)}
       />
       <TextBox
-        lableText="Password"
+        placeholder="Password"
         type="password"
         onChange={(e) => (password.current = e.target.value)}
       />

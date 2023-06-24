@@ -23,3 +23,9 @@ export async function insertNewProduct(product: IProduct) {
     })
     return userProducts
 }
+
+export async function deleteProduct(pid: string){
+    const collection = await getMongoCollection(COLLECTION_NAME)
+    const deletedProduct = await collection.deleteOne({_id: new ObjectId(pid)})
+    return deletedProduct
+}

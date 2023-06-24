@@ -9,7 +9,6 @@ export default function LoginPage() {
   const pass = useRef("");
 
   const onSubmit = async () => {
-    console.log("oi");
     const result = await signIn("credentials", {
       username: userName.current,
       password: pass.current,

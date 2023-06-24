@@ -17,6 +17,6 @@ export async function GET(
     );
   } */
 
-  console.log('oi')
+
   return new Response("Success")
 }
