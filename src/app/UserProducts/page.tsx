@@ -17,16 +17,19 @@ export default function userProducts() {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(5);
   const [showModal, setShowModal] = useState(false);
+  const [confirmationModal, setConfirmationModal] = useState(false);
 
   const deleteItem = async (pid: string) => {
-    /* const res = await fetch(`/api/products/${pid}`,{
+    const res = await fetch(`/api/products/${pid}`,{
       method: "DELETE",
       headers: {
         "accessToken" : String(session?.user.accessToken)
       }
     }
-    ) */
-    console.log(pid)
+    )
+    setConfirmationModal(false)
+    return
+    
   };
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export default function userProducts() {
         });
         const data = await res.json();
         setProducts(data);
-        setLoading(false);
+     
       }
     };
 
@@ -64,6 +67,9 @@ export default function userProducts() {
       </div>
       <div className="mt-12">
         <Products
+          confirmationModal={confirmationModal}
+          onClose={() => setConfirmationModal(false)}
+          onOpen={() => setConfirmationModal(true)}
           products={currentProducts}
           loading={loading}
           deleteItem={(pid: string) => deleteItem(pid)}

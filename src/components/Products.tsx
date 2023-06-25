@@ -16,11 +16,14 @@ interface IProducts {
   }[];
 
   loading: boolean;
+  confirmationModal: boolean
+  onOpen: () => void
+  onClose: () => void
   deleteItem: (pid: string) => void;
 }
 
-export default function Products({ products, loading, deleteItem }: IProducts) {
-  const [confirmationModal, setConfirmationModal] = useState(false);
+export default function Products({ products, onOpen, onClose, deleteItem, confirmationModal }: IProducts) {
+  
 
   return (
     <div>
@@ -41,7 +44,7 @@ export default function Products({ products, loading, deleteItem }: IProducts) {
                 <span>
                   <Image src={edit} width={20} height={20} alt="Edit button" />
                 </span>
-                <span onClick={() => setConfirmationModal(true)}>
+                <span onClick={onOpen}>
                   <Image src={del} width={20} height={20} alt="delete button" />
                 </span>
               </div>
@@ -52,10 +55,10 @@ export default function Products({ products, loading, deleteItem }: IProducts) {
                 {product.category}
               </p>
             </div>
+            <ConfirmationModal isVisible={confirmationModal} onClose={onClose} deleteItem={() => deleteItem(product._id)}/>
           </div>
         ))}
 
-        <ConfirmationModal isVisible={confirmationModal} onClose={() => setConfirmationModal(false)} deleteItem={() => deleteItem()}/>
     </div>
   );
 }
