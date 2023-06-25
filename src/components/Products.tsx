@@ -1,10 +1,8 @@
 "use client";
-
-import edit from "#/images/edit.svg";
-import del from "#/images/delete.svg";
-import Image from "next/image";
 import { useState } from "react";
 import ConfirmationModal from "./Modals/ConfirmationModal";
+import EditModal from "./Modals/EditModal";
+import { ProductCard } from "./ProductCard";
 
 interface IProducts {
   products: {
@@ -14,51 +12,35 @@ interface IProducts {
     description: string;
     price: number;
   }[];
-
-  loading: boolean;
-  confirmationModal: boolean
-  onOpen: () => void
+  onOpen: (pid?:any) => void
   onClose: () => void
+
+  editModal?: boolean;
   deleteItem: (pid: string) => void;
 }
 
-export default function Products({ products, onOpen, onClose, deleteItem, confirmationModal }: IProducts) {
-  
+export default function Products({
+  products,
+  deleteItem,
+  onClose,
+  onOpen
+}: IProducts) {
 
   return (
     <div>
       {Array.isArray(products) &&
         products.map((product) => (
-          <div
-            key={product._id}
-            className="relative mt-12 p-4 py-10 bg-scnd-white rounded-md"
-          >
-            <div>
-              <div className="bg-prime-violet min-w-11 p-3 h-11 text-center rounded-2xl flex items-center justify-center absolute top-[-20px] left-3">
-                <p className="font-bold text-scnd-white text-xs">
-                  {product.price}€
-                </p>
-              </div>
+          <div key={product._id}>
+            <ProductCard
+              product={product}
+              onOpen={(pid: string) => onOpen(pid)}
+              onClose={onClose}
+              deleteItem={(pid) => deleteItem(pid)}
+            />
 
-              <div className="absolute top-5 right-5 flex gap-3">
-                <span>
-                  <Image src={edit} width={20} height={20} alt="Edit button" />
-                </span>
-                <span onClick={onOpen}>
-                  <Image src={del} width={20} height={20} alt="delete button" />
-                </span>
-              </div>
-
-              <h3 className="font-bold my-2">{product.title}</h3>
-              <p className="text-[#6E8098] my-2">{product.description}</p>
-              <p className="mt-8 mb-[-12px] font-bold text-prime-violet text-sm">
-                {product.category}
-              </p>
-            </div>
-            <ConfirmationModal isVisible={confirmationModal} onClose={onClose} deleteItem={() => deleteItem(product._id)}/>
+            <EditModal isVisible={false} product={product} />
           </div>
         ))}
-
     </div>
   );
 }

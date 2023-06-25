@@ -60,6 +60,7 @@ const onSubmit = async () => {
           />
           <TextBox
             placeholder="Description"
+            type="textarea"
             onChange={(e) => (description.current = e.target.value)}
             className="shadow focus:shadow-prime-violet"
           />

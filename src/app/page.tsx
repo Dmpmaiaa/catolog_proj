@@ -1,16 +1,14 @@
 "use client";
 import Image from "next/image";
-import SignButton from "../components/SignButton";
+import { useRouter } from "next/navigation";
 
+import { useEffect } from "react";
 
 export default function Home() {
-  async function getData() {
-    const res = await fetch("/api/categories");
-    console.log(res);
-  }
-  return (
-    <>
-     
-    </>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/auth/signIn");
+  }, [router]);
+  return <></>;
 }

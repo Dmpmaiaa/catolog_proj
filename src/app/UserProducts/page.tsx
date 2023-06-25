@@ -9,32 +9,47 @@ import { useEffect, useState } from "react";
 import plus from "#/images/plus.svg";
 import { AddProductModal } from "@/components/Modals/AddProductModal";
 import { headers } from "next/dist/client/components/headers";
+import ConfirmationModal from "@/components/Modals/ConfirmationModal";
+import EditModal from "@/components/Modals/EditModal";
 
 export default function userProducts() {
   const { data: session } = useSession();
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(5);
   const [showModal, setShowModal] = useState(false);
-  const [confirmationModal, setConfirmationModal] = useState(false);
+  const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("");
+
+  const openConfirmationModal = (pid: string) => {
+    setSelectedItem(pid);
+    setConfirmationModalOpen(true);
+  };
+
+  const closeConfirmationModal = () => {
+    setConfirmationModalOpen(false);
+  };
+
+  const handleDeleteItem = () => {
+    deleteItem(selectedItem);
+    closeConfirmationModal();
+  };
+
+
+  const [editModal, setEditModal] = useState("");
 
   const deleteItem = async (pid: string) => {
-    const res = await fetch(`/api/products/${pid}`,{
+    const res = await fetch(`/api/products/${pid}`, {
       method: "DELETE",
       headers: {
-        "accessToken" : String(session?.user.accessToken)
-      }
-    }
-    )
-    setConfirmationModal(false)
-    return
-    
+        accessToken: String(session?.user.accessToken),
+      },
+    });
+    return;
   };
 
   useEffect(() => {
     const fetchProducts = async (uid: number | undefined) => {
-      setLoading(true);
       if (uid) {
         const res = await fetch(`/api/user/${uid}`, {
           headers: {
@@ -43,14 +58,11 @@ export default function userProducts() {
         });
         const data = await res.json();
         setProducts(data);
-     
       }
     };
 
     fetchProducts(session?.user._id);
   }, [session, deleteItem]);
-
- 
 
   // Get current posts
   const lastProductIdx = currentPage * productsPerPage;
@@ -67,18 +79,17 @@ export default function userProducts() {
       </div>
       <div className="mt-12">
         <Products
-          confirmationModal={confirmationModal}
-          onClose={() => setConfirmationModal(false)}
-          onOpen={() => setConfirmationModal(true)}
           products={currentProducts}
-          loading={loading}
           deleteItem={(pid: string) => deleteItem(pid)}
+          onOpen={openConfirmationModal}
+          onClose={closeConfirmationModal}
         />
         <Pagination
           productsPerPage={productsPerPage}
           totalProducts={products.length}
           paginate={(num: number) => setCurrentPage(num)}
           currentPage={currentPage}
+          
         />
       </div>
 
@@ -100,6 +111,15 @@ export default function userProducts() {
         onClose={() => setShowModal(false)}
         userSess={session?.user}
       />
+
+      <ConfirmationModal
+        isVisible={isConfirmationModalOpen}
+        onClose={closeConfirmationModal}
+        deleteItem={handleDeleteItem}
+      />
+
+     {/*  <EditModal /> */}
+
     </div>
   );
 }

@@ -5,14 +5,19 @@ import { Button } from "../elements/Button";
 interface IModalProps {
   isVisible: boolean;
   onClose: () => void;
-  deleteItem: any;
+  deleteItem: (pid:string) => void;
 }
 
-const ConfirmationModal = ({ isVisible, onClose, deleteItem }: IModalProps) => {
+const ConfirmationModal = ({
+  isVisible,
+  onClose,
+  deleteItem,
+}: IModalProps) => {
   return (
-    <Modal isVisible={isVisible} className="flex flex-col items-center gap-10 py-8 ">
-
-      <h3 className="w-44 font-semibold">Are you sure you want to delete this product?</h3>
+    <Modal isVisible={isVisible} className="flex flex-col items-center gap-10 py-8">
+      <h3 className="w-44 font-semibold">
+        Are you sure you want to delete this product?
+      </h3>
       <div className="flex justify-center items-center gap-4">
         <Button func={deleteItem} className={"bg-red-700 active:scale-95"}>
           <p className="text-white font-normal">Delete</p>
