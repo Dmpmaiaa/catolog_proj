@@ -48,7 +48,7 @@ export default function userProducts() {
     };
 
     fetchProducts(session?.user._id);
-  }, [session]);
+  }, [session, deleteItem]);
 
  
 
