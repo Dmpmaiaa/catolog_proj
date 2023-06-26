@@ -44,7 +44,7 @@ During the development of this project, I had the opportunity to learn and grow 
 
 - **Working with TypeScript:** This project served as my first experience with TypeScript, and it was a significant learning process. I gained a deeper understanding of TypeScript's static typing, type inference, and how it enhances code reliability and maintainability.
 - **Implementing JWT Authentication and Next-Auth:** This project introduced me to the world of JWT Authentication and the Next-Auth library. I learned how to secure my backend APIs using JWT tokens, handle user authentication and authorization, and leverage the features provided by Next-Auth for seamless integration.
-- **Exploring Next.js App Router:** With the release of Next.js 13, I had the opportunity to use the new App Router feature. This allowed me to navigate between pages more efficiently, manage route transitions, and handle client-side navigation with ease.
+- **Exploring Next.js App Router:** With the release of Next.js 13, I had the opportunity to use the new App Router feature. This allowed me to navigate between pages more efficiently, manage route transitions, and handle client-side navigation.
 
 ## Key Takeaways
 
