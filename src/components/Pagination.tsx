@@ -26,8 +26,8 @@ export default function Pagination({
         {pageNumbers.map((num) => (
           <li
             key={num}
-            className={`px-3 py-2 ml-0 w-10 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 ${
-              num == currentPage && "bg-red-500 hover:bg-red-400"
+            className={`transition-all duration-200 px-3 py-2 ml-0 w-10 h-10 leading-tight text-gray-500 bg-white border shadow rounded-lg hover:shadow-prime-violet hover:text-prime-violet hover:font-bold  cursor-pointer${
+              num == currentPage && "bg-prime-violet hover:border "
             }`}
             onClick={() => paginate(num)}
           >

@@ -18,8 +18,8 @@ export const Modal = ({
   }
 
   return (
-    <div className="fixed inset-0 bg-prime-dark-blue bg-opacity-50 backdrop-blur-sm flex justify-center items-center overflow-clip">
-      <div className="w-11/12 flex flex-col">
+    <div className="fixed inset-0 bg-prime-dark-blue bg-opacity-50 backdrop-blur-sm flex justify-center items-center">
+      <div className="w-full mx-2 lg:w-1/2 flex flex-col">
         {onClose && (
           <button
             onClick={() => onClose()}

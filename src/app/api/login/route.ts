@@ -13,6 +13,7 @@ export async function POST(request: Request) {
   const body: IRequestBodyLogin = await request.json();
 
   const user = await getUser(body);
+  console.log(user)
 
   if (user && (await bcrypt.compare(body.password, user.password))) {
     const { password, ...userWithoutPass } = user;

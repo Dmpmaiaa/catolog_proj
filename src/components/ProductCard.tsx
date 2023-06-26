@@ -12,16 +12,17 @@ interface IProductCardProps {
     description: string;
     price: number;
   };
+  startEditing: () => void
   onOpen: (pid:string) => void;
   onClose: () => void;
   deleteItem: (pid: string) => void;
+  
 }
 
 export const ProductCard = ({
   product,
   onOpen,
-  onClose,
-  deleteItem,
+  startEditing
 }: IProductCardProps) => {
  
 
@@ -37,11 +38,11 @@ export const ProductCard = ({
           </div>
     
           <div className="flex gap-6 lg:gap-3 lg:mb-5">
-            <span className="cursor-pointer">
-              <Image src={edit} width={20} height={20} alt="Edit button" />
+            <span className="cursor-pointer" onClick={startEditing}>
+              <Image priority src={edit} width={20} height={20} alt="Edit button" />
             </span>
             <span onClick={() => onOpen(product._id)} className="cursor-pointer"> 
-              <Image src={del} width={20} height={20} alt="Delete button" />
+              <Image priority src={del} width={20} height={20} alt="Delete button" />
             </span>
           </div>
 

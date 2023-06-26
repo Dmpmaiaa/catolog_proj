@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import plus from "#/images/plus.svg";
 import { AddProductModal } from "@/components/Modals/AddProductModal";
 import ConfirmationModal from "@/components/Modals/ConfirmationModal";
-import EditModal from "@/components/Modals/EditModal";
 import { FilterDropdown } from "@/components/elements/FilterDropdown";
 
 export default function userProducts() {
@@ -87,11 +86,11 @@ export default function userProducts() {
 
   return (
     <div>
-      <div className="mt-[-54px] flex items-center justify-center w-full">
-        <div className="flex gap-1 lg:w-2/3 lg:justify-center bg-white rounded-md lg:shadow">
+      <div className="mt-[-35px] flex items-center justify-center w-full">
+        <div className="flex gap-1 lg:w-2/3 lg:justify-center  bg-white rounded-md ">
           <TextBox
             placeholder="Filter by Category"
-            className={"h-[72px] w-full"}
+            className={"h-[72px] w-full focus:shadow focus:shadow-prime-violet "}
           />
           <FilterDropdown
             // Pass all unique categories down to filter dropdown
@@ -105,7 +104,7 @@ export default function userProducts() {
           />
         </div>
       </div>
-      <div className="mt-12 w-full lg:flex lg:flex-col justify-center items-center">
+      <div className="mt-10 w-full lg:flex lg:flex-col justify-center items-center">
         <Products
           products={
             filteredProducts.length > 0 ? filteredProducts : currentProducts

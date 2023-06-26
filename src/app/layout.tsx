@@ -15,16 +15,17 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en">
-      <body className={`${kumbh.className} bg-scnd-light-gray`}>
+      <body className={`${kumbh.className} h-screen bg-scnd-light-gray`}>
         <Providers>
           <AppBar />
-
-          <div className="m-5">{children}</div>
+          <div className="mx-5">{children}</div>
         </Providers>
       </body>
     </html>

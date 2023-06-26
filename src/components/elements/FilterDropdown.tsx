@@ -22,7 +22,7 @@ export const FilterDropdown = ({
   return (
     <div className="relative flex flex-col">
       <button
-        className="text-prime-violet bg-scnd-white h-[72px] focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-30 "
+        className="text-prime-violet bg-scnd-white h-[72px] focus:outline-none focus:shadow focus:shadow-prime-violet font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-30 "
         type="button"
         onClick={() => setIsOpened(prevState => !prevState)}
        
@@ -55,7 +55,7 @@ export const FilterDropdown = ({
         >
             <li onClick={onFilterValueChange} id={"All"} className="block px-4 py-2 hover:bg-gray-100 ">All</li>
           {products.map((el: any) => (
-            <li key={el} onClick={onFilterValueChange} id={el} className="block px-4 py-2 hover:bg-gray-100 ">
+            <li key={el} onClick={onFilterValueChange} id={el}  className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
               {el}
             </li>
           ))}

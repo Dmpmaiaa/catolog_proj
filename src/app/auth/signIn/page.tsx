@@ -9,6 +9,7 @@ export default function LoginPage() {
   const pass = useRef("");
 
   const onSubmit = async () => {
+    console.log(userName.current)
     const result = await signIn("credentials", {
       username: userName.current,
       password: pass.current,
@@ -17,33 +18,43 @@ export default function LoginPage() {
     });
   };
   return (
-    <>
-      <div className="w-full overflow-y-hidden bg-mobile-banner bg-cover rounded-md">
+    <div className="h-screen flex items-center pb-16 lg:pb-0">
+      <div className="h-screen bg-prime-violet w-1/2 m-[-20px] hidden lg:block"></div>
+      <div className="w-full overflow-y-hidden  bg-cover rounded-md lg:w-1/2">
+        <div className="w-full flex flex-col items-center p-5 gap-2">
+          <p className="font-semibold text-2xl">Hello Again!</p>
+          <p className="font-light w-44 text-center">
+            Welcome back you've been missed!
+          </p>
+        </div>
         <div className="py-10 flex flex-col items-center justify-center gap-10">
           <TextBox
             placeholder="Username"
             onChange={(e) => (userName.current = e.target.value)}
           />
           <TextBox
-            placeholder="Passord"
+            placeholder="Password"
             type={"password"}
             onChange={(e) => (pass.current = e.target.value)}
           />
           <button
+            className="rounded-md bg-prime-violet h-10 w-72 flex items-center justify-center font-bold text-white lg:w-80"
             onClick={onSubmit}
-            className="rounded-md bg-scnd-light-gray h-10 w-40 flex items-center justify-center hover:bg-prime-light-violet font-bold text-prime-violet"
           >
             Login
           </button>
-        <Link href="/auth/signUp/">
-          <button className="rounded-md bg-prime-midnight h-10 w-40 flex items-center justify-center hover:bg-prime-light-violet font-bold text-scnd-light-gray shadow-sm">
-            Sign Up
-          </button>
-        </Link>
+          <div className="border w-2/3"></div>
+
+          <span>
+            <span>Not a member? </span>
+            <Link href="/auth/signUp/">
+              <span className="text-prime-violet hover:underline">
+                Register Now
+              </span>
+            </Link>
+          </span>
         </div>
       </div>
-      <div className="border ">
-      </div>
-    </>
+    </div>
   );
 }
