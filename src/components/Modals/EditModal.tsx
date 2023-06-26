@@ -5,10 +5,10 @@ import { Button } from "../elements/Button";
 interface IModalProps {
   isVisible: boolean;
   onClose?: () => void;
-  product: any
+
 }
 
-const EditModal = ({ isVisible, onClose, product }: IModalProps) => {
+const EditModal = ({ isVisible, onClose }: IModalProps) => {
   return (
     <Modal
       isVisible={Boolean(isVisible)}

@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "prime-violet" : "#5964E0",
+        "prime-violet" : "#5e0dff",
         "prime-light-violet": "#939BF4",
         "prime-dark-blue": "#19202D",
         "prime-midnight": "#121721",
@@ -19,8 +19,12 @@ module.exports = {
         "scnd-dark-gray": "#6E8098"
       },
       backgroundImage: {
-        "mobile-banner": "url('/images/bg-pattern-header.svg')"
-      }
+        "mobile-banner": "url('/images/nav-mobile.svg')",
+        "desktop-banner": "url('/images/nav-desktop.svg')"
+      },
+      container: {
+        center: true,
+      },
     },
   },
   plugins: [],

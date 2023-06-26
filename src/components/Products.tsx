@@ -12,7 +12,7 @@ interface IProducts {
     description: string;
     price: number;
   }[];
-  onOpen: (pid?:any) => void
+  onOpen: (type:string, pid?:any) => void
   onClose: () => void
 
   editModal?: boolean;
@@ -27,20 +27,24 @@ export default function Products({
 }: IProducts) {
 
   return (
-    <div>
+    <div className="lg:grid lg:grid-cols-3 lg:gap-4">
       {Array.isArray(products) &&
         products.map((product) => (
-          <div key={product._id}>
+          <div key={product._id} className="mb-2">
             <ProductCard
               product={product}
-              onOpen={(pid: string) => onOpen(pid)}
+              onOpen={(pid: string) => onOpen("confirmation", pid)}
               onClose={onClose}
               deleteItem={(pid) => deleteItem(pid)}
             />
 
-            <EditModal isVisible={false} product={product} />
+            
           </div>
         ))}
+
+
     </div>
+
+
   );
 }

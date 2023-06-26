@@ -26,7 +26,8 @@ export const AddProductModal = ({
   const category = useRef("");
 
 
-const onSubmit = async () => {
+const onSubmit = async (e:any) => {
+    e.preventDefault
     const res = await fetch ("/api/products" , {
         method: "POST",
         headers: {
@@ -76,7 +77,7 @@ const onSubmit = async () => {
             className="shadow focus:shadow-prime-violet"
           />
 
-          <button className="rounded-full bg-prime-violet text-white w-28 h-10 my-10" onClick={onSubmit}>Submit</button>
+          <button className="rounded-full bg-prime-violet text-white w-28 h-10 my-10" onClick={(e) =>onSubmit(e)}>Submit</button>
         </form>
       </Modal>
     </>

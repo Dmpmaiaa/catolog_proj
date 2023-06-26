@@ -23,9 +23,9 @@ export const Modal = ({
         {onClose && (
           <button
             onClick={() => onClose()}
-            className="text-scnd-light-gray text-xl place-self-end"
+            className="text-white text-bold text-xl place-self-end"
           >
-            X
+            Close
           </button>
         )}
         <div className={`bg-scnd-white p-3 rounded-md ${className}`}>

@@ -28,13 +28,15 @@ const SignOutBtn = () => {
   const { data: session } = useSession();
   if (session && session.user) {
     return (
-      <div className="ml-auto rounded-md  hover:bg-prime-light-violet font-bold text-sm text-prime-violet">
-        <button onClick={() => signOut()} className="text-red-600">
-          <Image src={logout} width={35} height={35} alt="logout btn" />
+      <div className="ml-auto rounded-md  hover:bg-scnd-white hover:text-prime-violet font-bold text-md text-scnd-white transition-colors duration-400">
+        {" "}
+        <button onClick={() => signOut()} className="lg:p-2">
+          Sign Out
+          {/* <Image src={logout} width={35} height={35} alt="logout btn" /> */}
         </button>
       </div>
     );
   }
 };
 
-export {SignButton, SignOutBtn};
+export { SignButton, SignOutBtn };
