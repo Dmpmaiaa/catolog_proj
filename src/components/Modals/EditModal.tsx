@@ -6,13 +6,14 @@ import TextBox from "../elements/TextBox";
 interface IEditModalProps {
   product: {
     _id: string;
+    userId: string;
     category: string;
     title: string;
     description: string;
     price: number;
   };
   onClose: () => void;
-  updateProduct: () => void;
+  updateProduct: (uid: string, product: any) => void;
 }
 
 export const EditModal = ({
@@ -36,9 +37,16 @@ export const EditModal = ({
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
+    const dataToSend = {
+      title: updatedProduct.title,
+      description: updatedProduct.description,
+      price: updatedProduct.price,
+      category: updatedProduct.category,
+      userId: updatedProduct.userId,
+    };
     e.preventDefault();
-    console.log(updatedProduct);
-    updateProduct();
+    updateProduct(updatedProduct._id, dataToSend)
+    onClose()
   };
 
   return (
@@ -46,7 +54,7 @@ export const EditModal = ({
       <form onSubmit={handleFormSubmit} className="flex flex-col gap-1">
         <div className="min-w-fit max-w-fit p-3 h-11 rounded-2xl  absolute top-[-40px] left-3 ">
           <p className="font-bold text-scnd-white text-xs lg:text-sm">
-          <input
+            <input
               autoComplete="off"
               type="text"
               name="price"
@@ -84,8 +92,17 @@ export const EditModal = ({
             />
           </p>
           <div className="lg: flex lg:gap-4 lg:w-full lg:justify-center">
-            <button type="submit" className="transition-all duration-200 text-bold text-2xl text-green-600 active:scale-95">✓</button>
-            <button type="button" className="transition-all duration-200 text-red-600 text-2xl active:scale-95" onClick={onClose}>
+            <button
+              type="submit"
+              className="transition-all duration-200 text-bold text-2xl text-green-600 active:scale-95"
+            >
+              ✓
+            </button>
+            <button
+              type="button"
+              className="transition-all duration-200 text-red-600 text-2xl active:scale-95"
+              onClick={onClose}
+            >
               X
             </button>
           </div>

@@ -1,5 +1,5 @@
 "use client";
-import { Modal } from "@/components/Modals/Modal";
+
 import Pagination from "@/components/Pagination";
 import Products from "@/components/Products";
 import TextBox from "@/components/elements/TextBox";
@@ -20,6 +20,8 @@ export default function userProducts() {
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   const openConfirmationModal = (type: string, pid: string) => {
     setSelectedItem(pid);
@@ -42,7 +44,7 @@ export default function userProducts() {
   };
 
   const onFilterValueSelected = (filterValue: string | number) => {
-    let filteredProducts = currentProducts.filter((el: any) => {
+    const filteredProducts = currentProducts.filter((el: any) => {
       if (filterValue === "All") {
         return el;
       }
@@ -50,6 +52,19 @@ export default function userProducts() {
     });
     setFilteredProducts(filteredProducts);
   };
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+    const filteredByName = currentProducts.filter((product: any) => {
+      const productName = product.title.toLowerCase();
+      const query = searchQuery.toLowerCase();
+      return productName.includes(query)
+    });
+    
+    setFilteredProducts(filteredByName)
+
+  };
+
 
   const deleteItem = async (pid: string) => {
     const res = await fetch(`/api/products/${pid}`, {
@@ -60,6 +75,21 @@ export default function userProducts() {
     });
     return;
   };
+
+  const updateItem = async (uid: string, updatedProduct: any) => {
+    
+    const res = await fetch(`/api/products/${uid}`,{
+      method: "PATCH",
+      headers:{
+        "Content-Type" : "application/json",
+        accessToken: String(session?.user.accessToken)
+      },
+      body: JSON.stringify(updatedProduct)
+     
+    })
+    console.log(res)
+
+  }
 
   useEffect(() => {
     const fetchProducts = async (uid: number | undefined) => {
@@ -75,22 +105,28 @@ export default function userProducts() {
     };
 
     fetchProducts(session?.user._id);
-  }, [session, deleteItem]);
+  }, [session, deleteItem, updateItem]);
 
-  const [filteredProducts, setFilteredProducts] = useState([]);
+
   // Get current posts
+  
   const lastProductIdx = currentPage * productsPerPage;
   const firstProductIdx = lastProductIdx - productsPerPage;
   const currentProducts: any =
     Array.isArray(products) && products?.slice(firstProductIdx, lastProductIdx);
+
+
 
   return (
     <div>
       <div className="mt-[-35px] flex items-center justify-center w-full">
         <div className="flex gap-1 lg:w-2/3 lg:justify-center  bg-white rounded-md ">
           <TextBox
+          type="search"
             placeholder="Filter by Category"
             className={"h-[72px] w-full focus:shadow focus:shadow-prime-violet "}
+            value={searchQuery}
+            onChange={handleSearch}
           />
           <FilterDropdown
             // Pass all unique categories down to filter dropdown
@@ -112,6 +148,7 @@ export default function userProducts() {
           deleteItem={(pid: string) => deleteItem(pid)}
           onOpen={openConfirmationModal}
           onClose={closeConfirmationModal}
+          updateProduct={(uid: string, updatedProduct:any) => updateItem(uid, updatedProduct)}
         />
 
         <Pagination

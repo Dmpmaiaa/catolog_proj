@@ -31,7 +31,7 @@ export async function PATCH(
   req: Request,
   { params }: { params: { id: number } }
 ) {
- /*  const accessToken = req.headers.get("accessToken");
+  const accessToken = req.headers.get("accessToken");
   if (!accessToken || !verifyJwt(accessToken)) {
     return new Response(
       JSON.stringify({
@@ -41,7 +41,7 @@ export async function PATCH(
         status: 401,
       }
     );
-  } */
+  }
 
   const pid = String(params.id);
   const newProductData = await req.json()

@@ -10,13 +10,14 @@ interface IProducts {
     category: string;
     title: string;
     description: string;
+    userId: string
     price: number;
   }[];
   onOpen: (type: string, pid?: any) => void;
   onClose: () => void;
-
-  editModal?: boolean;
   deleteItem: (pid: string) => void;
+  updateProduct: (uid:string, product:any) => void
+
 }
 
 export default function Products({
@@ -24,6 +25,7 @@ export default function Products({
   deleteItem,
   onClose,
   onOpen,
+  updateProduct
 }: IProducts) {
   const [editingProductId, setEditingProductId] = useState<string>("");
 
@@ -35,6 +37,8 @@ export default function Products({
     setEditingProductId(prevState => "");
   };
 
+ 
+
   return (
     <div className="lg:grid lg:grid-cols-3 lg:gap-5">
       {Array.isArray(products) &&
@@ -44,9 +48,7 @@ export default function Products({
               <EditModal
                 product={product}
                 onClose={stopEditing}
-                updateProduct={() => {
-                  // Implement the logic to update the product
-                }}
+                updateProduct={updateProduct}
               />
             ) : (
               <ProductCard
