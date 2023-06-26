@@ -2,6 +2,7 @@ import AppBar from "../components/AppBar";
 import Providers from "../components/Providers";
 import "./globals.css";
 import { Kumbh_Sans } from "next/font/google";
+import 'react-toastify/dist/ReactToastify.css';
 
 const kumbh = Kumbh_Sans({
   subsets: ["latin"],

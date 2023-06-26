@@ -10,6 +10,7 @@ import plus from "#/images/plus.svg";
 import { AddProductModal } from "@/components/Modals/AddProductModal";
 import ConfirmationModal from "@/components/Modals/ConfirmationModal";
 import { FilterDropdown } from "@/components/elements/FilterDropdown";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function userProducts() {
   const { data: session } = useSession();
@@ -58,13 +59,11 @@ export default function userProducts() {
     const filteredByName = currentProducts.filter((product: any) => {
       const productName = product.title.toLowerCase();
       const query = searchQuery.toLowerCase();
-      return productName.includes(query)
+      return productName.includes(query);
     });
-    
-    setFilteredProducts(filteredByName)
 
+    setFilteredProducts(filteredByName);
   };
-
 
   const deleteItem = async (pid: string) => {
     const res = await fetch(`/api/products/${pid}`, {
@@ -73,23 +72,42 @@ export default function userProducts() {
         accessToken: String(session?.user.accessToken),
       },
     });
-    return;
+    if(res.status === 202){
+      toast.info('Item deleted!', {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+        });
+    }
   };
 
   const updateItem = async (uid: string, updatedProduct: any) => {
-    
-    const res = await fetch(`/api/products/${uid}`,{
+    const res = await fetch(`/api/products/${uid}`, {
       method: "PATCH",
-      headers:{
-        "Content-Type" : "application/json",
-        accessToken: String(session?.user.accessToken)
+      headers: {
+        "Content-Type": "application/json",
+        accessToken: String(session?.user.accessToken),
       },
-      body: JSON.stringify(updatedProduct)
-     
-    })
-    console.log(res)
-
-  }
+      body: JSON.stringify(updatedProduct),
+    });
+    if(res.status === 202){
+      toast.info('Item updated!', {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+        });
+    }
+  };
 
   useEffect(() => {
     const fetchProducts = async (uid: number | undefined) => {
@@ -107,24 +125,23 @@ export default function userProducts() {
     fetchProducts(session?.user._id);
   }, [session, deleteItem, updateItem]);
 
-
   // Get current posts
-  
+
   const lastProductIdx = currentPage * productsPerPage;
   const firstProductIdx = lastProductIdx - productsPerPage;
   const currentProducts: any =
     Array.isArray(products) && products?.slice(firstProductIdx, lastProductIdx);
-
-
 
   return (
     <div>
       <div className="mt-[-35px] flex items-center justify-center w-full">
         <div className="flex gap-1 lg:w-2/3 lg:justify-center  bg-white rounded-md ">
           <TextBox
-          type="search"
-            placeholder="Filter by Category"
-            className={"h-[72px] w-full focus:shadow focus:shadow-prime-violet "}
+            type="search"
+            placeholder="Filter by Name"
+            className={
+              "h-[72px] w-full focus:shadow focus:shadow-prime-violet "
+            }
             value={searchQuery}
             onChange={handleSearch}
           />
@@ -148,7 +165,9 @@ export default function userProducts() {
           deleteItem={(pid: string) => deleteItem(pid)}
           onOpen={openConfirmationModal}
           onClose={closeConfirmationModal}
-          updateProduct={(uid: string, updatedProduct:any) => updateItem(uid, updatedProduct)}
+          updateProduct={(uid: string, updatedProduct: any) =>
+            updateItem(uid, updatedProduct)
+          }
         />
 
         <Pagination
@@ -186,6 +205,19 @@ export default function userProducts() {
         isVisible={isConfirmationModalOpen}
         onClose={closeConfirmationModal}
         deleteItem={handleDeleteItem}
+      />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
       />
     </div>
   );
