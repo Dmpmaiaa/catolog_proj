@@ -19,11 +19,11 @@ const ConfirmationModal = ({
         Are you sure you want to delete this product?
       </h3>
       <div className="flex justify-center items-center gap-4">
-        <Button func={deleteItem} className={"bg-red-700 active:scale-95"}>
+        <Button func={deleteItem} className={"transition-all duration-400 bg-red-700 active:scale-95 hover:bg-red-600"}>
           <p className="text-white font-normal">Delete</p>
         </Button>
 
-        <Button func={onClose} className={"bg-prime-violet active:scale-95"}>
+        <Button func={onClose} className={"transition-all duration-400 bg-prime-violet active:scale-95 hover:opacity-90"}>
           <p className="text-white font-normal">No</p>
         </Button>
       </div>

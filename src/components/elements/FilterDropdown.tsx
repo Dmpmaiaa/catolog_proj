@@ -1,4 +1,4 @@
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface IFilterDropdownProps {
   products: any;
@@ -10,24 +10,37 @@ export const FilterDropdown = ({
   filterValueSelected,
 }: IFilterDropdownProps) => {
   const [isOpened, setIsOpened] = useState(false);
-  const [selected, setSelected] = useState("All")
+  const [selected, setSelected] = useState("All");
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  
   const onFilterValueChange = (e: any) => {
-    setSelected(e.target.id)
+    setSelected(e.target.id);
     filterValueSelected(e.target.id);
-    setIsOpened(false)
+    setIsOpened(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpened(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative flex flex-col">
+    <div className="relative flex flex-col" ref={dropdownRef}>
       <button
         className="text-prime-violet bg-scnd-white h-[72px] focus:outline-none focus:shadow focus:shadow-prime-violet font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center w-30 "
         type="button"
-        onClick={() => setIsOpened(prevState => !prevState)}
-       
-        
-        
+        onClick={() => setIsOpened((prevState) => !prevState)}
       >
         {`${selected} `}
         <svg
@@ -38,34 +51,43 @@ export const FilterDropdown = ({
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path
-            strokeWidth="2"
-            d="M19 9l-7 7-7-7"
-          ></path>
+          <path strokeWidth="2" d="M19 9l-7 7-7-7"></path>
         </svg>
       </button>
-      <div
-        id="dropdown"
-        className={`absolute z-10 mr-32  ${
-          !isOpened && "hidden"
-        } bg-white divide-y divide-gray-100 rounded-lg shadow w-28 absolute left-[-38px] top-[80px] max-h-[180px] overflow-y-auto`}
-      >
-        <ul
-          className="py-2 text-sm text-prime-violet"
+      {isOpened && (
+        <div
+          id="dropdown"
+          className="z-10 mr-32 bg-white divide-y divide-gray-100 rounded-lg shadow w-28 absolute left-[-38px] top-[80px] max-h-[180px] overflow-y-auto"
         >
-            <li onClick={onFilterValueChange} id={"All"} className="block px-4 py-2 hover:bg-gray-100 ">All</li>
-          {products.map((el: any) => (
-            <li key={el} onClick={onFilterValueChange} id={el}  className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
-              {el}
+          <ul className="py-2 text-sm text-prime-violet">
+            <li
+              onClick={onFilterValueChange}
+              id="All"
+              className="block px-4 py-2 hover:bg-gray-100"
+            >
+              All
             </li>
-          ))}
-        </ul>
-      </div>
+            {products.map((el: any) => (
+              <li
+                key={el}
+                onClick={onFilterValueChange}
+                id={el}
+                className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                {el}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
 
+
 {
+
+
   /* <div>
       <select
         name="categories"

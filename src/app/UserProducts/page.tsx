@@ -45,14 +45,25 @@ export default function userProducts() {
   };
 
   const onFilterValueSelected = (filterValue: string | number) => {
-    const filteredProducts = currentProducts.filter((el: any) => {
+    const filteredProducts = products.filter((product: any) => {
       if (filterValue === "All") {
-        return el;
+        return true;
       }
-      return el.category === filterValue;
+      return product.category === filterValue;
     });
-    setFilteredProducts(filteredProducts);
+  
+    if (searchQuery !== "") {
+      const filteredByName = filteredProducts.filter((product: any) => {
+        const productName = product.title.toLowerCase();
+        const query = searchQuery.toLowerCase();
+        return productName.includes(query);
+      });
+      setFilteredProducts(filteredByName);
+    } else {
+      setFilteredProducts(filteredProducts);
+    }
   };
+  
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -184,10 +195,10 @@ export default function userProducts() {
 
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-5 lg:right-0 right-[-30px] flex items-center w-36 p-3 justify-center rounded-full "
+        className="transition-all duration-200 fixed bottom-5 lg:right-0 right-[-30px] flex items-center w-36 p-3 justify-center rounded-full active:rotate-90 active:scale-[95%] hover:scale-105"
       >
         <Image
-          className=" shadow-md shadow-prime-violet rounded-full "
+          className=" shadow-md shadow-prime-violet rounded-full hover"
           src={plus}
           width={50}
           height={50}

@@ -24,7 +24,6 @@ export default async function SignUp() {
 
   const submitForm = async () => {
    
-    console.log("oi");
     if (verifySignUpData(userName.current, password.current, email.current)) {
       const res = await fetch("/api/user", {
         method: "POST",
@@ -60,21 +59,24 @@ export default async function SignUp() {
           <TextBox
             placeholder="Username"
             onChange={(e) => (userName.current = e.target.value)}
+            className="focus:shadow"
           />
           <TextBox
             placeholder="Email"
             type="email"
             onChange={(e) => (email.current = e.target.value)}
+            className="focus:shadow"
           />
           <TextBox
             placeholder="Password"
             type="password"
             onChange={(e) => (password.current = e.target.value)}
+            className="focus:shadow"
           />
 
           <button
             type="submit"
-            className="rounded-md bg-prime-violet h-10 w-72 flex items-center justify-center font-bold text-white lg:w-80"
+            className="transition-all duration-400 rounded-md bg-prime-violet h-10 w-72 flex items-center justify-center font-bold text-white lg:w-80 hover:opacity-90 active:scale-[98%]"
             onClick={submitForm}
           >
             Create account

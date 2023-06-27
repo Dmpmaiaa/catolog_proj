@@ -8,24 +8,28 @@ export interface IRequestBodySignUp {
 }
 
 export async function POST(request: Request, response: Response) {
-  const body: IRequestBodySignUp = await request.json();
-  console.log("POST to /api/user");
+  try {
+    const body: IRequestBodySignUp = await request.json();
+    console.log("POST to /api/user");
 
-  const user = await createUser({
-    username: body.username,
-    email: body.email,
-    password: await bcrypt.hash(body.password, 10),
-  });
+    const user = await createUser({
+      username: body.username,
+      email: body.email,
+      password: await bcrypt.hash(body.password, 10),
+    });
 
-  if (user) {
-    const { password, ...result } = user;
-   
-    return new Response(result, {status: 201});
+    if (user) {
+      const { password, ...result } = user;
+
+      return new Response(result, { status: 201 });
+    }
+    return new Response(
+      JSON.stringify({
+        error: "User already exists",
+      }),
+      { status: 409 }
+    );
+  } catch (error) {
+    console.log(error);
   }
-  return new Response(
-    JSON.stringify({
-      error: "User already exists",
-    }),
-    { status: 409 }
-  );
 }

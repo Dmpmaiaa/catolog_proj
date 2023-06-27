@@ -49,14 +49,14 @@ export const AddProductModal = ({
       <Modal
         isVisible={isVisible}
         onClose={onClose}
-        className="flex items-center justify-center"
+        className="flex justify-center p-8"
       >
         <form className="flex flex-col gap-6">
-          <h3 className="font-bold text-2xl my-10 text-prime-violet">
+          <h3 className="font-bold text-2xl mb-4 text-prime-violet">
             Create new product
           </h3>
           <div>
-            <label>Title</label>
+            <span>Title</span>
             <TextBox
               placeholder="e.g. Playstation 5"
               onChange={(e) => (title.current = e.target.value)}
@@ -64,7 +64,7 @@ export const AddProductModal = ({
             />
           </div>
           <div>
-            <label>Description</label>
+            <span>Description</span>
             <textarea
               name="txt"
               placeholder="e.g Home video game console developed by Sony Interactive Entertainment..."
@@ -75,7 +75,7 @@ export const AddProductModal = ({
           </div>
 
           <div>
-            <label>Price</label>
+            <span>Price</span>
             <TextBox
               placeholder="e.g 549"
               type="number"
@@ -84,16 +84,16 @@ export const AddProductModal = ({
             />
           </div>
           <div>
-            <label>Category</label>
+            <span>Category</span>
             <TextBox
               placeholder="e.g. Technology"
               onChange={(e) => (category.current = e.target.value)}
               className="shadow focus:shadow-prime-violet"
             />
           </div>
-          <div className="w-full text-center">
+          <div className="w-full text-center flex justify-center">
             <button
-              className="rounded-md bg-prime-violet text-white w-28 h-10 my-10"
+              className="transition-all duration-400 rounded-md bg-prime-violet h-10 w-40 text-center font-bold text-white lg:w-80 hover:opacity-90 active:scale-[98%]"
               onClick={(e) => onSubmit(e)}
             >
               Add product

@@ -25,7 +25,7 @@ export const ProductCard = ({
 }: IProductCardProps) => {
   return (
     <>
-      <div className="relative p-4 py-10 bg-scnd-white rounded-md border lg:flex lg:w-96 lg:h-72">
+      <div className="relative p-4 py-10 mt-10 lg:mt-0 bg-scnd-white rounded-md border lg:flex lg:w-96 lg:h-72">
         <div className="lg:w-full">
           <div className="bg-prime-violet min-w-11 max-w-11 p-3 h-11 text-center rounded-2xl flex items-center justify-center absolute top-[-20px] left-3 ">
             <p className="font-bold text-scnd-white text-xs lg:text-sm">

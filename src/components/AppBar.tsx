@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import React from "react";
 import { SignOutBtn } from "./SignButton";
-import logout from "#/images/logout.svg";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 const AppBar = () => {
   const { data: session } = useSession();
-  if (session?.user) {
+  const path = usePathname()
+  if (!path.includes("auth")) {
     return (
       <header className=" w-full flex justify-between gap-4 p-9 h-[136px] bg-prime-violet lg:rounded-bl-full lg:rounded-br-full lg:bg-no-repeat lg:bg-cover lg:bg-bottom ">
         <h1 className="text-scnd-white font-bold text-xl lg:ml-72">

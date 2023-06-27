@@ -10,23 +10,27 @@ export interface IProduct {
 }
 
 export async function POST(req: Request) {
-  const accessToken = req.headers.get("accessToken");
-  if (!accessToken || !verifyJwt(accessToken)) {
-    return new Response(
-      JSON.stringify({
-        error: "Unauthorized",
-      }),
-      {
-        status: 401,
-      }
-    );
-  }
+  try {
+    const accessToken = req.headers.get("accessToken");
+    if (!accessToken || !verifyJwt(accessToken)) {
+      return new Response(
+        JSON.stringify({
+          error: "Unauthorized",
+        }),
+        {
+          status: 401,
+        }
+      );
+    }
 
-  if (req.method === "POST") {
-    const product: IProduct = await req.json();
-    const newProduct = addNewProduct(product);
-    return new Response(JSON.stringify({ msg: "product_created" }), {
-      status: 201,
-    });
+    if (req.method === "POST") {
+      const product: IProduct = await req.json();
+      const newProduct = addNewProduct(product);
+      return new Response(JSON.stringify({ msg: "product_created" }), {
+        status: 201,
+      });
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
