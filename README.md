@@ -1,5 +1,6 @@
 # Product Catalog
 
+![Video Showcase](https://youtu.be/uH-V_cEFf4w)
 This Product Catalog project is a web application built with:
 
 - [TypeScript](https://www.typescriptlang.org/)
