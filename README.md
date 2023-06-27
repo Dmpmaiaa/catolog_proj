@@ -2,7 +2,9 @@
 
 
 [![Product Catalog video showcase](https://img.youtube.com/vi/uH-V_cEFf4w/0.jpg)](https://www.youtube.com/watch?v=uH-V_cEFf4w)
-https://youtu.be/uH-V_cEFf4w
+
+
+
 This Product Catalog project is a web application built with:
 
 - [TypeScript](https://www.typescriptlang.org/)
